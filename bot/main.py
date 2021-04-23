@@ -15,13 +15,13 @@ async def on_ready() :
 
 @client.event
 async def on_message(message):
-    if client.user.id == message.author.id:
-        return
-    if '69' in message.content:
-        await message.reply('nice!', mention_author=False)
+    if client.user.id != message.author.id:
+        if '69' in message.content:
+            await message.reply('nice!', mention_author=False)
+    await client.process_commands(message)
 
 @client.command()
-async def clear(ctx, amount=3) :
+async def clear(ctx, amount=10) :
     await ctx.channel.purge(limit=amount)
 
 
