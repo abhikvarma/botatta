@@ -4,4 +4,4 @@
 - [ ] covid updates
 - [x] song
 - [ ] valorant noises
-- [ ] detention
+- [x] detention
