@@ -59,4 +59,23 @@ async def clear(ctx, amount=3) :
     await ctx.channel.purge(limit=amount+1)
 
 
+#put people in detention
+@client.command()
+async def detain(ctx):
+    det_channel = None
+    for channel in ctx.message.guild.channels:
+        if "detention" in channel.name:
+            det_channel = channel
+            break
+            
+    # channel now holds the channel you want to move people into
+    #channel = client.get_channel({channel ID here}) 
+    user = ctx.message.content.split()[2]
+    user = user.replace('<@!','').replace('>','')
+    
+    #member now holds the user that you want to move
+    member = client.get_member(user)
+
+    await member.move_to(channel)
+
 client.run(token)
