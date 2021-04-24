@@ -2,6 +2,6 @@
 
 ## features
 - [ ] covid updates
-- [ ] song
+- [x] song
 - [ ] valorant noises
 - [ ] detention

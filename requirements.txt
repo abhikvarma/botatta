@@ -1,2 +1,4 @@
 discord.py
+discord.py[voice]
 python-dotenv
+youtube_dl
