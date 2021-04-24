@@ -27,7 +27,7 @@ async def on_message(message):
         for each in check:
             count+= words.count(each)
         if(count and count<=2): await message.channel.send('Nice :ok_hand:')
-        else: await message.channel.send('Oh lord thats very nice :fire::fire:')
+        elif count>=3: await message.channel.send('Oh lord thats very nice :fire::fire:')
     await client.process_commands(message)
     #if client.user.id != message.author.id:
 
@@ -60,22 +60,17 @@ async def clear(ctx, amount=3) :
 
 
 #put people in detention
-@client.command()
-async def detain(ctx):
+@client.command(aliases=['jail','shut up','shoo'])
+async def detain(ctx):  #figure out permissions
     det_channel = None
     for channel in ctx.message.guild.channels:
         if "detention" in channel.name:
             det_channel = channel
-            break
-            
-    # channel now holds the channel you want to move people into
-    #channel = client.get_channel({channel ID here}) 
+            break           
     user = ctx.message.content.split()[2]
     user = user.replace('<@!','').replace('>','')
-    
-    #member now holds the user that you want to move
-    member = client.get_member(user)
-
-    await member.move_to(channel)
+    members = ctx.message.mentions
+    for member in members:
+        await member.move_to(det_channel)
 
 client.run(token)
