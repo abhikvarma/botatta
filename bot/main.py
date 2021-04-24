@@ -37,10 +37,8 @@ async def sing(ctx):
     if (ctx.author.voice):
         channel = ctx.message.author.voice.channel
         voice = await channel.connect()
-        source = discord.FFmpegPCMAudio('./res/atta_song.mp3')
+        source = discord.FFmpegPCMAudio('./res/atta_song_low.mp3')
         voice.play(source)
-        voice.source = discord.PCMVolumeTransformer(voice.source)
-        voice.souce.volume = 0.5
     else:
         await ctx.message.channel.send('Ayeeee\njoin voice channel')
 
