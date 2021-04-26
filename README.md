@@ -5,10 +5,10 @@
 - [x] collect valorant noises
 - [x] detention
 - [x] quiz text channel
-- [ ] covid updates
-- [ ] list of things atta says
-- [ ] birthdays
+- [x] covid updates
+- [x] birthdays
 - [x] create dp (avi)
+- [ ] list of things atta says
 - [ ] detain tt on only 'atta detain'
 
 
