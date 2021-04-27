@@ -4,3 +4,4 @@ python-dotenv
 youtube_dl
 ffmpeg
 pynacl
+requests
