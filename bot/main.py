@@ -43,7 +43,7 @@ async def budday():
                         for member in guild.members:
                             if member.name+'#'+member.discriminator == row[2]:
                                 for channel in guild.channels:
-                                    if channel.id == 616227241013149716 : #835419932865986590 for test
+                                    if channel.id == 689052830463688754 : #835419932865986590 for test
                                         await channel.send('Happy birthday ' + member.mention + ' :partying_face:')
 
 
@@ -84,7 +84,7 @@ async def sing(ctx):
         while voice.is_playing(): 
             await asyncio.sleep(1) 
         else:
-            await asyncio.sleep(300)
+            await asyncio.sleep(900)
             if last_played == id(obj):
                 await voice.disconnect()
                 await ctx.message.channel.send('I\'ll leave bro')
@@ -104,25 +104,28 @@ async def noises(ctx):
             if ctx.author.voice.channel == ctx.voice_client.channel:
                 voice = ctx.voice_client 
             else:
-                voice = await ctx.voice_client.move_to(ctx.author.voice.channel)
+                await ctx.voice_client.move_to(ctx.author.voice.channel)
+                voice = ctx.voice_client
         num = ctx.message.content.split()[-1]
         try:
             num = int(num)
+            if num>10:
+                await ctx.message.channel.send('That\'s too many man')
+                return
         except:
             num = 1
         
-        for i in range(num):
+        for _ in range(num):
             source = discord.FFmpegPCMAudio('./res/noises/'+random.choice(os.listdir('./res/noises')))
             obj = object()
             last_played = id(obj)
             ctx.voice_client.play(source)
             while voice.is_playing(): 
-                await ctx.message.channel.send('in noises while')
                 await asyncio.sleep(1) 
         while voice.is_playing(): 
             await asyncio.sleep(1) 
         else:
-            await asyncio.sleep(300)
+            await asyncio.sleep(900)
             if last_played == id(obj):
                 await voice.disconnect()
                 await ctx.message.channel.send('I\'ll leave bro')
@@ -157,8 +160,14 @@ async def detain(ctx):  #figure out permissions
             det_channel = channel
             break           
     members = ctx.message.mentions
+    if len(members)==0:
+        tt = ctx.guild.get_member(454966507902992404)
+        members.append(tt)
     for member in members:
-        await member.move_to(det_channel)
+        if member.voice is None:
+            await ctx.message.channel.send(member.name + ' is not on a voice channel :person_facepalming:')
+        else:
+            await member.move_to(det_channel)
 
 
 #create quiz text channel
@@ -214,6 +223,5 @@ async def on_command_error(ctx, error):
         await ctx.send('no')
     if isinstance(error, commands.CommandInvokeError):
        await ctx.send('Aye you wait da')
-
 
 client.run(token)

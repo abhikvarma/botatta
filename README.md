@@ -10,6 +10,6 @@
 - [x] create dp (avi)
 - [ ] custom help command
 - [ ] list of things atta says
-- [ ] detain tt on only 'atta detain'
+- [x] detain tt on only 'atta detain'
 
 
