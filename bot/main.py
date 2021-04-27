@@ -105,10 +105,20 @@ async def noises(ctx):
                 voice = ctx.voice_client 
             else:
                 voice = await ctx.voice_client.move_to(ctx.author.voice.channel)
-        source = discord.FFmpegPCMAudio('./res/noises/'+random.choice(os.listdir('./res/noises')))
-        obj = object()
-        last_played = id(obj)
-        ctx.voice_client.play(source)
+        num = ctx.message.content.split()[-1]
+        try:
+            num = int(num)
+        except:
+            num = 1
+        
+        for i in range(num):
+            source = discord.FFmpegPCMAudio('./res/noises/'+random.choice(os.listdir('./res/noises')))
+            obj = object()
+            last_played = id(obj)
+            ctx.voice_client.play(source)
+            while voice.is_playing(): 
+                await ctx.message.channel.send('in noises while')
+                await asyncio.sleep(1) 
         while voice.is_playing(): 
             await asyncio.sleep(1) 
         else:
