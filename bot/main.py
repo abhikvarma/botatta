@@ -35,18 +35,18 @@ async def on_ready() :
 async def budday():
     print(datetime.date.today().month)
     print(datetime.date.today().day)
-    # with open('./res/buddays.csv', 'r') as file:
-    #     buddays = csv.reader(file)
-    #     next(buddays)
-    #     for row in buddays:
-    #         if int(row[1][0:2]) == datetime.date.today().month and int(row[1][3:6])==datetime.date.today().day:
-    #             for guild in client.guilds:
-    #                 if guild.id == 542723128137351178 : #835037637789483018 for bt
-    #                     for member in guild.members:
-    #                         if member.name+'#'+member.discriminator == row[2]:
-    #                             for channel in guild.channels:
-    #                                 if channel.id == 689052830463688754 : #835419932865986590 for test
-    #                                     await channel.send('Happy birthday ' + member.mention + ' :partying_face:')
+    with open('./res/buddays.csv', 'r') as file:
+        buddays = csv.reader(file)
+        next(buddays)
+        for row in buddays:
+            if int(row[1][0:2]) == datetime.date.today().month and int(row[1][3:6])==datetime.date.today().day:
+                for guild in client.guilds:
+                    if guild.id == 542723128137351178 : #835037637789483018 for bt
+                        for member in guild.members:
+                            if member.name+'#'+member.discriminator == row[2]:
+                                for channel in guild.channels:
+                                    if channel.id == 689052830463688754 : #835419932865986590 for test
+                                        await channel.send('Happy birthday ' + member.mention + ' :partying_face:')
 
 
 #say nice
