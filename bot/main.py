@@ -25,7 +25,7 @@ last_played = None
 #output on ready
 @client.event
 async def on_ready() :
-    await client.change_presence(status = discord.Status.idle, activity = discord.Game("VALOLANT"))
+    await client.change_presence(status = discord.Status.online, activity = discord.Game("VALOLANT"))
     print("oowwee im up")
     budday.start()
 
