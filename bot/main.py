@@ -8,6 +8,7 @@ import youtube_dl
 import asyncio
 import requests
 import datetime
+import pytz
 import csv
 
 load_dotenv()
@@ -20,6 +21,7 @@ token = os.getenv("DISCORD_BOT_TOKEN")
 
 #vars
 last_played = None
+ist = pytz.timezone("Asia/Calcutta")
 
 
 #output on ready
@@ -33,13 +35,12 @@ async def on_ready() :
 #birthday crap
 @tasks.loop(hours=24)
 async def budday():
-    print(datetime.date.today().month)
-    print(datetime.date.today().day)
+    global ist
     with open('./res/buddays.csv', 'r') as file:
         buddays = csv.reader(file)
         next(buddays)
         for row in buddays:
-            if int(row[1][0:2]) == datetime.date.today().month and int(row[1][3:6])==datetime.date.today().day:
+            if int(row[1][0:2]) == datetime.datetime.now(ist).month and int(row[1][3:6])==datetime.datetime.now(ist).day:
                 for guild in client.guilds:
                     if guild.id == 542723128137351178 : #835037637789483018 for bt
                         for member in guild.members:
