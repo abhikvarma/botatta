@@ -55,7 +55,7 @@ async def budday():
 async def on_message(message):
     check = ['69','420']
     if any(x in message.content for x in check) and client.user.id != message.author.id:
-        raw_mentions = ['<@!{0}>'.format(each) for each in message.raw_mentions]
+        raw_mentions = ['<@{0}>'.format(each) for each in message.raw_mentions]
         words = list(filter(lambda word: word not in raw_mentions,message.content.split()))
         words = ''.join(words)
         count = 0
@@ -205,8 +205,9 @@ async def covid(ctx):
     i_d_con = 'no info yet' if api_data['statewise'][0]['deltaconfirmed']=='0' else '{:,d}'.format(int(api_data['statewise'][0]['deltaconfirmed']))
     i_act = int(api_data['statewise'][0]['active'])
 
-    k_d_con = 'no info yet' if api_data['statewise'][3]['deltaconfirmed']=='0' else '{:,d}'.format(int(api_data['statewise'][3]['deltaconfirmed']))
-    k_act = int(api_data['statewise'][3]['active'])
+    k_idx = next((i for i,d in enumerate(api_data['statewise']) if d['statecode']=='KA'),None)
+    k_d_con = 'no info yet' if api_data['statewise'][k_idx]['deltaconfirmed']=='0' else '{:,d}'.format(int(api_data['statewise'][k_idx]['deltaconfirmed']))
+    k_act = int(api_data['statewise'][k_idx]['active'])
 
     temp = blore_data['Karnataka']['districtData']['Bengaluru Urban']['delta']['confirmed']
     b_d_con = 'no info yet' if temp==0 else '{:,d}'.format(temp)
