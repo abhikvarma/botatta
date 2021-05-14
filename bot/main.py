@@ -61,7 +61,6 @@ async def on_message(message):
         if(count and count<=2): await message.channel.send('Nice :ok_hand:')
         elif count>=3: await message.channel.send('Oh lord thats very nice :fire::fire:')
     await client.process_commands(message)
-    #if client.user.id != message.author.id:
 
 
 #sing
