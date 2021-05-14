@@ -54,13 +54,10 @@ async def budday():
 @client.event
 async def on_message(message):
     check = ['69','420']
-    if any(x in message.content for x in check) and client.user.id != message.author.id:
-        raw_mentions = ['<@{0}>'.format(each) for each in message.raw_mentions]
-        words = list(filter(lambda word: word not in raw_mentions,message.content.split()))
-        words = ''.join(words)
+    if any(x in message.clean_content for x in check) and client.user.id != message.author.id:
         count = 0
         for each in check:
-            count+= words.count(each)
+            count+= message.clean_content.count(each)
         if(count and count<=2): await message.channel.send('Nice :ok_hand:')
         elif count>=3: await message.channel.send('Oh lord thats very nice :fire::fire:')
     await client.process_commands(message)
