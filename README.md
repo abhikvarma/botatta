@@ -1,6 +1,7 @@
 # botatta
 
 ## features
+- [ ] atta replace
 - [x] song
 - [x] collect valorant noises
 - [x] detention
