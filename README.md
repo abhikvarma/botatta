@@ -1,6 +1,7 @@
 # botatta
 
 ## features
+- [ ] atta shame (audio file with adeab)
 - [ ] atta replace
 - [x] song
 - [x] collect valorant noises
