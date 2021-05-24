@@ -22,7 +22,7 @@ token = os.getenv("DISCORD_BOT_TOKEN")
 #vars
 last_played = None
 ist = pytz.timezone("Asia/Calcutta")
-
+atta_id = 477113185481130015
 
 #output on ready
 @client.event
@@ -62,6 +62,23 @@ async def on_message(message):
         elif count>=3: await message.channel.send('Oh lord thats very nice :fire::fire:')
     await client.process_commands(message)
 
+#replace
+@client.command()
+@commands.has_guild_permissions(move_members = True)
+async def replace(ctx):
+    global atta_id
+    for guild in client.guilds:
+        if guild.id == 542723128137351178:
+            for member in guild.members:
+                if member.id == atta_id:
+                    atta = member
+    if(ctx.author.voice.channel==atta.voice.channel):
+        channel = ctx.author.voice.channel
+        await channel.connect()
+        await atta.move_to(None)
+        await ctx.message.channel.send('Im the atta now')
+    else:
+        await ctx.message.channel.send('No')
 
 #sing
 @client.command(aliases=['kolaveridi','geography','whythis']) #fill this
@@ -90,6 +107,32 @@ async def sing(ctx):
     else:
         await ctx.message.channel.send('Ayeeee\njoin voice channel')
 
+#shame
+@client.command(aliases=['carry']) #fill this
+async def shame(ctx):
+    if (ctx.author.voice):
+        global last_played
+        channel = ctx.author.voice.channel
+        if ctx.voice_client is None:
+            voice = await channel.connect()
+        else: 
+            if ctx.author.voice.channel == ctx.voice_client.channel:
+                voice = ctx.voice_client 
+            else:
+                voice = await ctx.voice_client.move_to(ctx.author.voice.channel)
+        source = discord.FFmpegPCMAudio('./res/shame/shame1.mp3')
+        obj = object()
+        last_played = id(obj)
+        ctx.voice_client.play(source)
+        while voice.is_playing(): 
+            await asyncio.sleep(1) 
+        else:
+            await asyncio.sleep(900)
+            if last_played == id(obj):
+                await voice.disconnect()
+                await ctx.message.channel.send('I\'ll leave bro')
+    else:
+        await ctx.message.channel.send('Ayeeee\njoin voice channel')
 
 #noises
 @client.command(aliases=['random','moo'])
@@ -217,11 +260,11 @@ async def covid(ctx):
 
 
 #COMMENT THIS TO DEBUG 
-@client.event
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.MissingPermissions):
-        await ctx.send('no')
-    if isinstance(error, commands.CommandInvokeError):
-       await ctx.send('Aye you wait da')
+# @client.event
+# async def on_command_error(ctx, error):
+#     if isinstance(error, commands.MissingPermissions):
+#         await ctx.send('no')
+#     if isinstance(error, commands.CommandInvokeError):
+#        await ctx.send('Aye you wait da')
 
 client.run(token)
