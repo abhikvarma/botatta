@@ -226,6 +226,7 @@ async def move(ctx):  #figure out permissions
     for member in members:
         if member.voice is not None:
             await member.move_to(target_channel)
+    await ctx.message.channel.send('Moved everyone')
 
 #create quiz text channel
 @client.command(aliases=['createquiz'])
