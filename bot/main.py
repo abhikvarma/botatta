@@ -197,7 +197,7 @@ async def clear(ctx, amount=1) :
 @commands.has_guild_permissions(move_members = True)
 async def detain(ctx):  #figure out permissions
     det_channel = None
-    for channel in ctx.message.guild.channels:
+    for channel in ctx.message.guild.voice_channels :
         if "detention" in channel.name:
             det_channel = channel
             break           
@@ -211,6 +211,21 @@ async def detain(ctx):  #figure out permissions
         else:
             await member.move_to(det_channel)
 
+#put people in detention
+# @client.command(aliases=['jail','shut','shoo'])
+@commands.has_guild_permissions(move_members = True)
+async def move(ctx):  #figure out permissions
+    target_channel = ctx.message.content.split()[-1]
+    for channel in ctx.message.guild.voice_channels:
+        if target_channel in channel.name:
+            target_channel = channel
+            break
+    members = ctx.message.mentions
+    if len(members)==0:
+        return
+    for member in members:
+        if member.voice is not None:
+            await member.move_to(target_channel)
 
 #create quiz text channel
 @client.command(aliases=['createquiz'])
