@@ -10,8 +10,9 @@
 - [x] covid updates
 - [x] birthdays
 - [x] create dp (avi)
+- [x] detain tt on only 'atta detain'
 - [ ] custom help command
 - [ ] list of things atta says
-- [x] detain tt on only 'atta detain'
+- [ ] move everyone from one voice channel to another
 
 
